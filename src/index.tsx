@@ -1,7 +1,7 @@
 /* @refresh reload */
 import { render } from "solid-js/web";
-import { App } from "./App.tsx";
+import { Main } from "./main.tsx";
 
 const root = document.getElementById("root");
 
-if (root) render(() => <App />, root);
+if (root) render(() => <Main />, root);
