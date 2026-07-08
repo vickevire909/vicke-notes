@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/solid-router";
 
-export const Route = createFileRoute("/_app/")({
+export const Route = createFileRoute("/_shell/")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return <div>Hello "/_app/"!</div>;
+  return <div>Hello "/_shell/"!</div>;
 }

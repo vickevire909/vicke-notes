@@ -9,73 +9,73 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./routes/__root"
-import { Route as AppRouteImport } from "./routes/_app"
-import { Route as AppIndexRouteImport } from "./routes/_app/index"
+import { Route as ShellRouteImport } from "./routes/_shell"
+import { Route as ShellIndexRouteImport } from "./routes/_shell/index"
 
-const AppRoute = AppRouteImport.update({
-  id: "/_app",
+const ShellRoute = ShellRouteImport.update({
+  id: "/_shell",
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppIndexRoute = AppIndexRouteImport.update({
+const ShellIndexRoute = ShellIndexRouteImport.update({
   id: "/",
   path: "/",
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => ShellRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof AppIndexRoute
+  "/": typeof ShellIndexRoute
 }
 export interface FileRoutesByTo {
-  "/": typeof AppIndexRoute
+  "/": typeof ShellIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  "/_app": typeof AppRouteWithChildren
-  "/_app/": typeof AppIndexRoute
+  "/_shell": typeof ShellRouteWithChildren
+  "/_shell/": typeof ShellIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: "/"
   fileRoutesByTo: FileRoutesByTo
   to: "/"
-  id: "__root__" | "/_app" | "/_app/"
+  id: "__root__" | "/_shell" | "/_shell/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AppRoute: typeof AppRouteWithChildren
+  ShellRoute: typeof ShellRouteWithChildren
 }
 
 declare module "@tanstack/solid-router" {
   interface FileRoutesByPath {
-    "/_app": {
-      id: "/_app"
+    "/_shell": {
+      id: "/_shell"
       path: ""
       fullPath: "/"
-      preLoaderRoute: typeof AppRouteImport
+      preLoaderRoute: typeof ShellRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/_app/": {
-      id: "/_app/"
+    "/_shell/": {
+      id: "/_shell/"
       path: "/"
       fullPath: "/"
-      preLoaderRoute: typeof AppIndexRouteImport
-      parentRoute: typeof AppRoute
+      preLoaderRoute: typeof ShellIndexRouteImport
+      parentRoute: typeof ShellRoute
     }
   }
 }
 
-interface AppRouteChildren {
-  AppIndexRoute: typeof AppIndexRoute
+interface ShellRouteChildren {
+  ShellIndexRoute: typeof ShellIndexRoute
 }
 
-const AppRouteChildren: AppRouteChildren = {
-  AppIndexRoute: AppIndexRoute,
+const ShellRouteChildren: ShellRouteChildren = {
+  ShellIndexRoute: ShellIndexRoute,
 }
 
-const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  AppRoute: AppRouteWithChildren,
+  ShellRoute: ShellRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

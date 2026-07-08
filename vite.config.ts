@@ -16,4 +16,7 @@ export default defineConfig({
     solid(),
     tailwindcss(),
   ],
+  server: {
+    host: true,
+  },
 });
