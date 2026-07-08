@@ -1,17 +1,12 @@
-import {
-  createFileRoute,
-  Link,
-  Outlet,
-  useLocation,
-} from "@tanstack/solid-router";
-import { type } from "arktype";
-import { type Accessor } from "solid-js";
+import { createFileRoute, Link, Outlet, useLocation } from '@tanstack/solid-router';
+import { type } from 'arktype';
+import { type Accessor } from 'solid-js';
 
 const shellSearchSchema = type({
-  isSidebarOpen: "boolean = false",
+  isSidebarOpen: 'boolean = false',
 });
 
-export const Route = createFileRoute("/_shell")({
+export const Route = createFileRoute('/_shell')({
   validateSearch: shellSearchSchema,
   component: RouteComponent,
 });
@@ -34,8 +29,8 @@ function RouteComponent() {
       <nav
         class="fixed top-0 left-0 z-50 h-full w-72 -translate-x-full border-r border-stone-700 bg-stone-800 p-4 shadow-lg transition-transform"
         classList={{
-          "translate-x-0": isSidebarOpen(),
-          "-translate-x-full": !isSidebarOpen(),
+          'translate-x-0': isSidebarOpen(),
+          '-translate-x-full': !isSidebarOpen(),
         }}
         aria-label="Sidebar navigation"
       >
@@ -79,8 +74,8 @@ function Overlay(props: OverlayProps) {
     <div
       class="fixed inset-0 z-40 bg-black/20 transition-opacity"
       classList={{
-        "pointer-events-none opacity-0": !props.isDrawerOpen(),
-        "opacity-100": props.isDrawerOpen(),
+        'pointer-events-none opacity-0': !props.isDrawerOpen(),
+        'opacity-100': props.isDrawerOpen(),
       }}
       aria-hidden={!props.isDrawerOpen()}
       hidden={!props.isDrawerOpen()}

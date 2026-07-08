@@ -1,5 +1,5 @@
-import { createRootRoute, Outlet } from "@tanstack/solid-router";
-import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
+import { createRootRoute, Outlet } from '@tanstack/solid-router';
+import { TanStackRouterDevtools } from '@tanstack/solid-router-devtools';
 
 const RootLayout = () => (
   <>
