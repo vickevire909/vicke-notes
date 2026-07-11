@@ -30,7 +30,11 @@ export default defineConfig({
         name: 'VickeNotes App',
         short_name: 'VickeNotes',
         description: 'Simple note-taking app',
+        start_url: '/',
+        scope: '/',
+        display: 'standalone',
         theme_color: '#ffffff',
+        background_color: '#ffffff',
         icons: [
           {
             src: 'pwa-64x64.png',
@@ -59,6 +63,6 @@ export default defineConfig({
     tailwindcss(),
   ],
   server: {
-    host: true,
+    host: '0.0.0.0',
   },
 });
