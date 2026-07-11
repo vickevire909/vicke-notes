@@ -8,56 +8,56 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from "./routes/__root"
-import { Route as ShellRouteImport } from "./routes/_shell"
-import { Route as ShellIndexRouteImport } from "./routes/_shell/index"
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as ShellIndexRouteImport } from './routes/_shell/index'
 
 const ShellRoute = ShellRouteImport.update({
-  id: "/_shell",
+  id: '/_shell',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShellIndexRoute = ShellIndexRouteImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => ShellRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof ShellIndexRoute
+  '/': typeof ShellIndexRoute
 }
 export interface FileRoutesByTo {
-  "/": typeof ShellIndexRoute
+  '/': typeof ShellIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  "/_shell": typeof ShellRouteWithChildren
-  "/_shell/": typeof ShellIndexRoute
+  '/_shell': typeof ShellRouteWithChildren
+  '/_shell/': typeof ShellIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/"
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to: "/"
-  id: "__root__" | "/_shell" | "/_shell/"
+  to: '/'
+  id: '__root__' | '/_shell' | '/_shell/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   ShellRoute: typeof ShellRouteWithChildren
 }
 
-declare module "@tanstack/solid-router" {
+declare module '@tanstack/solid-router' {
   interface FileRoutesByPath {
-    "/_shell": {
-      id: "/_shell"
-      path: ""
-      fullPath: "/"
+    '/_shell': {
+      id: '/_shell'
+      path: ''
+      fullPath: '/'
       preLoaderRoute: typeof ShellRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/_shell/": {
-      id: "/_shell/"
-      path: "/"
-      fullPath: "/"
+    '/_shell/': {
+      id: '/_shell/'
+      path: '/'
+      fullPath: '/'
       preLoaderRoute: typeof ShellIndexRouteImport
       parentRoute: typeof ShellRoute
     }

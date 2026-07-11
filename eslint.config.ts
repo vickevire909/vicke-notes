@@ -10,18 +10,23 @@ const solidFlat = plugin.configs['flat/typescript'] as unknown as Config;
 const routerFlat = pluginRouter.configs['flat/recommended'];
 
 export default defineConfig(
-  globalIgnores(['dist', '**/routeTree.gen.ts']),
+  globalIgnores([
+    'dist',
+    'dev-dist',
+    '**/routeTree.gen.ts',
+    'pnpm-lock.yaml',
+    'pnpm-workspace.yaml',
+  ]),
   {
-    files: ['**/*.{js,cjs,mjs,jsx}'],
+    files: ['**/*.{ts,cts,mts,tsx,js,cjs,mjs,jsx}'],
     plugins: {
       js,
     },
-    extends: [js.configs.recommended],
-  },
-  {
-    files: ['**/*.{ts,cts,mts,tsx}'],
-
-    extends: [tseslint.configs.strictTypeChecked, tseslint.configs.stylisticTypeChecked],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
+    ],
     languageOptions: {
       globals: globals.browser,
       parserOptions: {
@@ -29,10 +34,6 @@ export default defineConfig(
         projectService: true,
       },
     },
-  },
-  solidFlat,
-  routerFlat,
-  {
     rules: {
       '@typescript-eslint/only-throw-error': [
         'error',
@@ -53,6 +54,8 @@ export default defineConfig(
       ],
     },
   },
+  solidFlat,
+  routerFlat,
   {
     files: ['eslint.config.ts'],
     extends: [tseslint.configs.disableTypeChecked],

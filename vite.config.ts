@@ -3,6 +3,9 @@ import { defineConfig } from 'vite';
 import solid from 'vite-plugin-solid';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { homedir } from 'node:os';
 
 export default defineConfig({
   plugins: [
@@ -12,7 +15,7 @@ export default defineConfig({
       routesDirectory: './src/routes',
       generatedRouteTree: './src/routeTree.gen.ts',
       routeFileIgnorePrefix: '-',
-      quoteStyle: 'double',
+      quoteStyle: 'single',
     }),
     solid(),
     VitePWA({
@@ -64,5 +67,9 @@ export default defineConfig({
   ],
   server: {
     host: '0.0.0.0',
+    https: {
+      key: readFileSync(resolve(homedir(), '.certs', 'key.pem'), 'utf8'),
+      cert: readFileSync(resolve(homedir(), '.certs', 'cert.pem'), 'utf8'),
+    },
   },
 });
